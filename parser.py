@@ -31,7 +31,7 @@ def get_strava():
                            password=DB_PASSWORD,
                            database=DB_NAME)
     while True:
-        """Honoring minute/seconds quota."""
+        # Honoring minute/seconds quota
         time.sleep(0.5)
         if len(ATHLETE) > 0:
             endpoint = 'athletes/{}'.format(ATHLETE)
