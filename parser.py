@@ -26,25 +26,17 @@ def get_strava():
         """Create MySQL-compatible datetime object."""
         return datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
 
-    try:
-        conn = pymysql.connect(host=DB_HOST,
-                               user=DB_USER,
-                               password=DB_PASSWORD,
-                               database=DB_NAME)
-    except:
-        logging.critical('Database connection issue!')
-        exit(1)
+    conn = pymysql.connect(host=DB_HOST,
+                           user=DB_USER,
+                           password=DB_PASSWORD,
+                           database=DB_NAME)
     while True:
         """Honoring minute/seconds quota."""
         time.sleep(0.5)
-        try:
-            if len(ATHLETE) > 0:
-                endpoint = 'athletes/{}'.format(ATHLETE)
-            r = requests.get('https://www.strava.com/api/v3/{}'.
-                             format(endpoint), headers=headers)
-        except:
-            logging.critical('API connection issue!')
-            exit(1)
+        if len(ATHLETE) > 0:
+            endpoint = 'athletes/{}'.format(ATHLETE)
+        r = requests.get('https://www.strava.com/api/v3/{}'.
+                         format(endpoint), headers=headers)
         limit = list(map(int, r.headers['X-RateLimit-Limit'].split(',')))
         usage = list(map(int, r.headers['X-RateLimit-Usage'].split(',')))
         if usage[1] > limit[1]:
@@ -78,11 +70,7 @@ def get_strava():
                                                            ', '.join(['%s'
                                                                       for i in
                                                                       keys]))
-            try:
-                cur.execute(q.replace("'", ''), values)
-            except:
-                logging.critical('Database insert issue!')
-                exit(1)
+            cur.execute(q.replace("'", ''), values)
         conn.commit()
     conn.close()
 
