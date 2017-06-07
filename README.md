@@ -4,3 +4,5 @@
 
 Getting full athletes data dump to SQL database through API.
 Requires a simple config file and Strave API key.
+
+[![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
