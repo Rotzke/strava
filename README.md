@@ -1,4 +1,4 @@
-# Strava athletes data scraper
+# Strava Athletes Data Scraper
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f522d02f69664f4487db70109c5aee8d)](https://www.codacy.com/app/Rotzke/strava?utm_source=github.com&utm_medium=referral&utm_content=Rotzke/strava&utm_campaign=badger)
 
